@@ -1,0 +1,15 @@
+sudo qemu-system-x86_64 -d int -nographic -enable-kvm -m 8192 -cpu host,kvm=off \
+-smp 4,sockets=1,cores=4,threads=1 \
+-device vfio-pci,host=03:00.0,x-vga=on -device vfio-pci,host=03:00.1 \
+-vga none \
+-device virtio-scsi-pci,id=scsi \
+-drive file=/home/joe/WVM/windows.img,id=disk,format=raw,if=none -device scsi-hd,drive=disk \
+-drive file=/home/joe/WVM/windows.iso,id=isocd,if=none -device scsi-cd,drive=isocd \
+-drive file=/home/joe/WVM/virtio.iso,id=virtiocd,if=none -device ide-cd,bus=ide.1,drive=virtiocd \
+-device vfio-pci,host=08:00.0 \
+-device vfio-pci,host=09:00.0 \
+-rtc base=localtime \
+-soundhw hda
+
+
+
